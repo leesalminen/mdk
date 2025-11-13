@@ -2543,10 +2543,7 @@ mod tests {
 
         // Verify the error is GroupNotFound (Charlie doesn't have access)
         assert!(
-            matches!(
-                charlie_message_result,
-                Err(crate::Error::GroupNotFound)
-            ),
+            matches!(charlie_message_result, Err(crate::Error::GroupNotFound)),
             "Should return GroupNotFound error for non-member"
         );
 
