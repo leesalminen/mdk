@@ -1,0 +1,67 @@
+client:
+  name: basic
+  file-system: device-agnostic
+tools: {}
+targets:
+  "MDKBindings-arm64-apple-macosx15.0-debug.module": ["<MDKBindings-arm64-apple-macosx15.0-debug.module>"]
+  "PackageStructure": ["<PackageStructure>"]
+  "main": ["<MDKBindings-arm64-apple-macosx15.0-debug.module>","<mdk_uniffiFFI-arm64-apple-macosx15.0-debug.module>"]
+  "mdk_uniffiFFI-arm64-apple-macosx15.0-debug.module": ["<mdk_uniffiFFI-arm64-apple-macosx15.0-debug.module>"]
+  "test": ["<MDKBindings-arm64-apple-macosx15.0-debug.module>","<mdk_uniffiFFI-arm64-apple-macosx15.0-debug.module>"]
+default: "main"
+nodes:
+  "/Users/lee/apps-local/mdk/swift/MDKPackage/Binary/mdk_uniffi.xcframework/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+  "/Users/lee/apps-local/mdk/swift/MDKPackage/Sources/MDKBindings/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+  "/Users/lee/apps-local/mdk/swift/MDKPackage/Sources/mdk_uniffiFFI/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+commands:
+  "/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/MDKBindings.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/lee/apps-local/mdk/swift/MDKPackage/Sources/MDKBindings/mdk_uniffi.swift"]
+    outputs: ["/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/MDKBindings.build/sources"]
+    description: "Write auxiliary file /Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/MDKBindings.build/sources"
+
+  "/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/mdk_uniffiFFI.build/mdk_uniffiFFI.c.o":
+    tool: clang
+    inputs: ["/Users/lee/apps-local/mdk/swift/MDKPackage/Sources/mdk_uniffiFFI/mdk_uniffiFFI.c"]
+    outputs: ["/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/mdk_uniffiFFI.build/mdk_uniffiFFI.c.o"]
+    description: "Compiling mdk_uniffiFFI mdk_uniffiFFI.c"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang","-fobjc-arc","-target","arm64-apple-macosx10.13","-O0","-DSWIFT_PACKAGE=1","-DDEBUG=1","-fblocks","-index-store-path","/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/index/store","-fmodules","-fmodule-name=mdk_uniffiFFI","-fmodules-cache-path=/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/ModuleCache","-I","/Users/lee/apps-local/mdk/swift/MDKPackage/Sources/mdk_uniffiFFI/include","-isysroot","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-fPIC","-g","-MD","-MT","dependencies","-MF","/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/mdk_uniffiFFI.build/mdk_uniffiFFI.c.d","-c","/Users/lee/apps-local/mdk/swift/MDKPackage/Sources/mdk_uniffiFFI/mdk_uniffiFFI.c","-o","/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/mdk_uniffiFFI.build/mdk_uniffiFFI.c.o"]
+    deps: "/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/mdk_uniffiFFI.build/mdk_uniffiFFI.c.d"
+
+  "/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt":
+    tool: write-auxiliary-file
+    inputs: ["<swift-get-version>","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"]
+    outputs: ["/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"]
+    always-out-of-date: "true"
+    description: "Write auxiliary file /Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+
+  "<MDKBindings-arm64-apple-macosx15.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/MDKBindings.build/mdk_uniffi.swift.o","/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/Modules/MDKBindings.swiftmodule"]
+    outputs: ["<MDKBindings-arm64-apple-macosx15.0-debug.module>"]
+
+  "<mdk_uniffiFFI-arm64-apple-macosx15.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/mdk_uniffiFFI.build/mdk_uniffiFFI.c.o"]
+    outputs: ["<mdk_uniffiFFI-arm64-apple-macosx15.0-debug.module>"]
+
+  "C.MDKBindings-arm64-apple-macosx15.0-debug.module":
+    tool: shell
+    inputs: ["/Users/lee/apps-local/mdk/swift/MDKPackage/Sources/MDKBindings/mdk_uniffi.swift","/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/mdk_uniffiFFI.build/mdk_uniffiFFI.c.o","/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/MDKBindings.build/sources"]
+    outputs: ["/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/MDKBindings.build/mdk_uniffi.swift.o","/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/Modules/MDKBindings.swiftmodule"]
+    description: "Compiling Swift Module 'MDKBindings' (1 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","MDKBindings","-emit-dependencies","-emit-module","-emit-module-path","/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/Modules/MDKBindings.swiftmodule","-output-file-map","/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/MDKBindings.build/output-file-map.json","-parse-as-library","-incremental","-c","@/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/MDKBindings.build/sources","-I","/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx10.13","-enable-batch-mode","-index-store-path","/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-j10","-DSWIFT_PACKAGE","-DDEBUG","-Xcc","-fmodule-map-file=/Users/lee/apps-local/mdk/swift/MDKPackage/Sources/mdk_uniffiFFI/include/module.modulemap","-Xcc","-I","-Xcc","/Users/lee/apps-local/mdk/swift/MDKPackage/Sources/mdk_uniffiFFI/include","-module-cache-path","/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-parse-as-library","-emit-objc-header","-emit-objc-header-path","/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/MDKBindings.build/MDKBindings-Swift.h","-swift-version","5","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","mdkpackage"]
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/Users/lee/apps-local/mdk/swift/MDKPackage/Binary/mdk_uniffi.xcframework/","/Users/lee/apps-local/mdk/swift/MDKPackage/Sources/MDKBindings/","/Users/lee/apps-local/mdk/swift/MDKPackage/Sources/mdk_uniffiFFI/","/Users/lee/apps-local/mdk/swift/MDKPackage/Package.swift","/Users/lee/apps-local/mdk/swift/MDKPackage/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+

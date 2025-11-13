@@ -1,0 +1,4 @@
+module MDKBindings {
+    header "/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/MDKBindings.build/MDKBindings-Swift.h"
+    requires objc
+}

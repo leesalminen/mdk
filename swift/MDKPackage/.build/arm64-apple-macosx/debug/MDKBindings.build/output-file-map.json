@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/MDKBindings.build/master.swiftdeps"
+  },
+  "/Users/lee/apps-local/mdk/swift/MDKPackage/Sources/MDKBindings/mdk_uniffi.swift": {
+    "dependencies": "/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/MDKBindings.build/mdk_uniffi.d",
+    "object": "/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/MDKBindings.build/mdk_uniffi.swift.o",
+    "swiftmodule": "/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/MDKBindings.build/mdk_uniffi~partial.swiftmodule",
+    "swift-dependencies": "/Users/lee/apps-local/mdk/swift/MDKPackage/.build/arm64-apple-macosx/debug/MDKBindings.build/mdk_uniffi.swiftdeps"
+  }
+}

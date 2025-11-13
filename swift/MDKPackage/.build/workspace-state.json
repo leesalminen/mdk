@@ -1,0 +1,27 @@
+{
+  "object" : {
+    "artifacts" : [
+      {
+        "kind" : "xcframework",
+        "packageRef" : {
+          "identity" : "mdkpackage",
+          "kind" : "root",
+          "location" : "/Users/lee/apps-local/mdk/swift/MDKPackage",
+          "name" : "MDKPackage"
+        },
+        "path" : "/Users/lee/apps-local/mdk/swift/MDKPackage/Binary/mdk_uniffi.xcframework",
+        "source" : {
+          "type" : "local"
+        },
+        "targetName" : "mdk_uniffiLib"
+      }
+    ],
+    "dependencies" : [
+
+    ],
+    "prebuilts" : [
+
+    ]
+  },
+  "version" : 7
+}
