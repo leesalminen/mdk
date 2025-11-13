@@ -2294,7 +2294,7 @@ mod tests {
             let rumor = create_test_rumor(&creator, &format!("Message {}", i));
             let message_event = mdk
                 .create_message(&group_id, rumor)
-                .expect(&format!("Failed to create message {}", i));
+                .unwrap_or_else(|_| panic!("Failed to create message {}", i));
             messages_created.push((i, message_event));
         }
 
@@ -2545,7 +2545,7 @@ mod tests {
         assert!(
             matches!(
                 charlie_message_result,
-                Err(crate::Error::GroupNotFound { .. })
+                Err(crate::Error::GroupNotFound)
             ),
             "Should return GroupNotFound error for non-member"
         );
@@ -2636,9 +2636,9 @@ mod tests {
         );
 
         // Verify messages are in order
-        for i in 0..5 {
+        for (i, message) in bob_messages.iter().enumerate().take(5) {
             assert!(
-                bob_messages[i]
+                message
                     .content
                     .contains(&format!("Message {} while Bob offline", i)),
                 "Messages should be in correct order"
@@ -2900,7 +2900,7 @@ mod tests {
             .expect("Bob should get messages");
 
         assert!(
-            bob_messages.len() >= 1,
+            !bob_messages.is_empty(),
             "Bob should have at least the message from epoch 0"
         );
         assert!(
